@@ -16,15 +16,13 @@ template <class SP> void printSP(const SP &sp, int v) {
 }
 
 int main() {
-  constexpr int v{8}, e{12};
+  constexpr int v{8}, e{12}, source{4};
   for (int k = 0; k < 256; k++) {
     std::print("EdgeWeightedDigraph\n");
     EdgeWeightedDigraph EWD(v);
     generateGraph(EWD, e);
     printGraph(EWD);
     std::print("\n");
-
-    int source{1};
 
     BellmanFord BFSP(EWD, source);
     std::print("BellmanFord\n");
