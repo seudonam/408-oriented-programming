@@ -22,6 +22,14 @@ template <class T> void swap(T &a, T &b) {
   b = (remove_reference_t<T> &&)x;
 }
 
+// 最值
+template <typename T> T max(T a, T b) {
+  if (a > b)
+    return a;
+  else
+    return b;
+}
+
 // 序检查
 template <typename compar> bool is_sorted(const ns::vector<compar> &A) {
   for (int i(1), sz(A.size()); i < sz; ++i)
