@@ -1,3 +1,4 @@
+#include <cassert>
 #include <utility>
 
 namespace ns {
@@ -45,8 +46,14 @@ template <class T> struct unique_ptr {
 
 int main() {
   ns::shared_ptr<int> sp(new int(0));
-  ns::shared_ptr<int> sq = sp;
-  ns::shared_ptr<int> sr(sq);
+  assert(*sp.refcnt == 1);
+  {
+    ns::shared_ptr<int> sq = sp;
+    assert(*sq.refcnt == 2);
+    ns::shared_ptr<int> sr(sq);
+    assert(*sr.refcnt == 3);
+  }
+  assert(*sp.refcnt == 1);
 
   ns::unique_ptr<int> up(new int(0));
   ns::unique_ptr<int> uq = std::move(up);
